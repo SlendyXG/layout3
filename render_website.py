@@ -3,6 +3,7 @@ from urllib.parse import quote
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
+from more_itertools import chunked
 
 
 def render_website():
@@ -12,13 +13,15 @@ def render_website():
     for book in books:
         book["img_src"] = quote(book["img_src"].replace("\\", "/"), safe="/")
 
+    book_pairs = list(chunked(books, 2))
+
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(["html", "xml"]),
     )
     template = env.get_template("template.html")
 
-    html = template.render(books=books)
+    html = template.render(book_pairs=book_pairs)
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
