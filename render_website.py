@@ -16,6 +16,11 @@ def render_website():
     for book in books:
         book["img_src"] = quote(book["img_src"].replace("\\", "/"), safe="/")
         book["book_path"] = quote(book["book_path"].replace("\\", "/"), safe="/")
+        book["genres"] = [
+            g.strip().rstrip(".")
+            for g in book["genres"].split(",")
+            if g.strip()
+        ]
 
     pages = list(chunked(books, BOOKS_PER_PAGE))
     total_pages = len(pages)
@@ -52,8 +57,6 @@ def render_website():
             "</body>\n"
             "</html>\n"
         )
-
-    print(f"Готово: {total_pages} страниц, книг — {len(books)}")
 
 
 def on_reload():
