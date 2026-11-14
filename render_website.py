@@ -2,9 +2,10 @@ import json
 from urllib.parse import quote
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from livereload import Server
 
 
-def main():
+def render_website():
     with open("meta_data.json", "r", encoding="utf-8") as f:
         books = json.load(f)
 
@@ -23,6 +24,19 @@ def main():
         f.write(html)
 
     print(f"Готово: index.html, книг — {len(books)}")
+
+
+def on_reload():
+    render_website()
+
+
+def main():
+    render_website()
+
+    server = Server()
+    server.watch("template.html", on_reload)
+    server.watch("meta_data.json", on_reload)
+    server.serve(root=".", port=5500)
 
 
 if __name__ == "__main__":
