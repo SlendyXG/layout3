@@ -49,6 +49,7 @@ def render_website():
             "<html lang=\"ru\">\n"
             "<head>\n"
             "  <meta charset=\"UTF-8\">\n"
+            "  <link rel=\"icon\" href=\"favicon.ico\" type=\"image/x-icon\">\n"
             "  <meta http-equiv=\"refresh\" content=\"0; url=pages/index1.html\">\n"
             "  <title>Библиотека Максима</title>\n"
             "</head>\n"
