@@ -12,6 +12,7 @@ def render_website():
 
     for book in books:
         book["img_src"] = quote(book["img_src"].replace("\\", "/"), safe="/")
+        book["book_path"] = quote(book["book_path"].replace("\\", "/"), safe="/")
 
     book_pairs = list(chunked(books, 2))
 
