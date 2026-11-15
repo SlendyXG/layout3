@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 from urllib.parse import quote
@@ -7,10 +8,11 @@ from livereload import Server
 from more_itertools import chunked
 
 BOOKS_PER_PAGE = 10
+DEFAULT_JSON_PATH = "meta_data.json"
 
 
-def render_website():
-    with open("meta_data.json", "r", encoding="utf-8") as f:
+def render_website(json_path):
+    with open(json_path, "r", encoding="utf-8") as f:
         books = json.load(f)
 
     for book in books:
@@ -60,16 +62,28 @@ def render_website():
         )
 
 
-def on_reload():
-    render_website()
-
-
 def main():
-    render_website()
+    parser = argparse.ArgumentParser(
+        description="Generate the book library website from a JSON metadata file."
+    )
+    parser.add_argument(
+        "-j",
+        "--json-path",
+        default=os.getenv("META_DATA_PATH", DEFAULT_JSON_PATH),
+        help="Path to the book metadata JSON (default: %(default)s)",
+    )
+    args = parser.parse_args()
+
+    json_path = args.json_path
+
+    def on_reload():
+        render_website(json_path)
+
+    render_website(json_path)
 
     server = Server()
     server.watch("template.html", on_reload)
-    server.watch("meta_data.json", on_reload)
+    server.watch(json_path, on_reload)
     server.serve(root=".", port=5500)
 
 
