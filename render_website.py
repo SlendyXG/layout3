@@ -3,6 +3,7 @@ import json
 import os
 from urllib.parse import quote
 
+from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
@@ -71,6 +72,8 @@ def render_website(json_path):
 
 
 def main():
+    load_dotenv()
+
     parser = argparse.ArgumentParser(
         description="Generate the book library website from a JSON metadata file."
     )
