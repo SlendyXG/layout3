@@ -16,8 +16,16 @@ def render_website(json_path):
         books = json.load(f)
 
     for book in books:
-        book["img_src"] = quote(book["img_src"].replace("\\", "/"), safe="/")
-        book["book_path"] = quote(book["book_path"].replace("\\", "/"), safe="/")
+        img_src = book["img_src"].replace("\\", "/")
+        if not img_src.startswith("media/"):
+            img_src = "media/" + img_src
+
+        book_path = book["book_path"].replace("\\", "/")
+        if not book_path.startswith("media/"):
+            book_path = "media/" + book_path
+
+        book["img_src"] = quote(img_src, safe="/")
+        book["book_path"] = quote(book_path, safe="/")
         book["genres"] = [
             g.strip().rstrip(".")
             for g in book["genres"].split(",")
