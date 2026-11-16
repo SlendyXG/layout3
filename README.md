@@ -18,12 +18,13 @@ This is the easiest way to browse the library on your computer — no coding, no
 
 1. Open the repository page on GitHub.
 2. Click the green **Code** button and choose **Download ZIP**.
-3. Unpack the downloaded archive to any folder.
-4. Open the `index.html` file inside the unpacked folder using any modern browser (double-click it, or drag it into a browser window).
-5. The first page of the library opens automatically. Use the **Назад** / **Вперёд** buttons at the top to switch between pages.
-6. Click **Читать** on any book card to open its text in a new browser tab.
+3. Unpack the downloaded archive to any folder on your computer.
+4. Open the unpacked folder — it will be named `layout3` or `layout3-main`. Inside you will see the `index.html` file.
+5. Double-click `index.html` — it will open in your default web browser.
+6. The first page of the library opens automatically. Use the **Назад** / **Вперёд** buttons at the top to switch between pages.
+7. Click **Читать** on any book card to open its text in a new browser tab.
 
-All styles, covers, and book texts are stored locally, so this works without an internet connection.
+All styles, covers, and book texts are stored locally in the `media/` and `static/` folders, so this works completely without an internet connection.
 
 ## How to run
 
